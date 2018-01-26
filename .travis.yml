@@ -21,7 +21,7 @@ deploy:
     - windows.zip
   skip_cleanup: true
   on:
-    repo: VanthStudios/UnityTemplateOpenSource
+    repo: VanthStudios/GGJ-2018
     tags: true
 
 notifications:
