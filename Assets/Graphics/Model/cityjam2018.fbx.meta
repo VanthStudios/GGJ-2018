@@ -1,7 +1,5 @@
 fileFormatVersion: 2
 guid: 515e974734866454f944c4a4bdc1ca71
-timeCreated: 1517067252
-licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -550,6 +548,7 @@ ModelImporter:
     4300208: Cube.001
     4300210: Cube
     4300212: Plane
+    9500000: //RootNode
     10800000: Lamp
   externalObjects: {}
   materials:
@@ -625,7 +624,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

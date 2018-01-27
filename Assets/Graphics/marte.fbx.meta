@@ -1,15 +1,21 @@
 fileFormatVersion: 2
-guid: a40213c065803a84c8725f3b8a0042c4
+guid: 158811124c962a749b1b51d901875cbd
+timeCreated: 1517069466
+licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2100000: No Name
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Sphere.003
-    9500000: //RootNode
+    100000: Icosphere.001
+    100002: //RootNode
+    100004: Sun.001
+    400000: Icosphere.001
+    400002: //RootNode
+    400004: Sun.001
+    2100000: Material
+    2300000: Icosphere.001
+    3300000: Icosphere.001
+    4300000: Icosphere.001
+    10800000: Sun.001
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -84,7 +90,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

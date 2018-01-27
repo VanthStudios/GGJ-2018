@@ -1,15 +1,24 @@
 fileFormatVersion: 2
-guid: a40213c065803a84c8725f3b8a0042c4
+guid: 8ee9abe099c01964fa1fe8bb1ff737fb
+timeCreated: 1517069470
+licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2100000: No Name
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Sphere.003
-    9500000: //RootNode
+    100000: Camera
+    100002: Icosphere.367
+    100004: //RootNode
+    100006: Sun
+    400000: Camera
+    400002: Icosphere.367
+    400004: //RootNode
+    400006: Sun
+    2000000: Camera
+    2100000: Material.001
+    2300000: Icosphere.367
+    3300000: Icosphere.367
+    4300000: Icosphere.367
+    10800000: Sun
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -84,7 +93,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
