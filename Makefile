@@ -13,12 +13,12 @@ PACKAGE= \
 
 LOG_PATH= "`pwd`/unity.log"
 PROJECT= `echo $(TRAVIS_REPO_SLUG) | cut -d '/' -f 2`
+ZIP_PATH= "ggj_2018"
 
-all: windows linux osx  
+all: windows
 	echo "All builds were built successfully."
 
 install:
-	set -e
 	for i in $(PACKAGE); do \
 		url="$(BASE_URL)/$(HASH)/$$i"; \
 		basePackage=`basename $$url`; \
@@ -28,44 +28,7 @@ install:
 		sudo installer -dumplog -package $$basePackage -target /; \
 	done;
 
-osx:
-	set -e
-	echo "Attempting to build $(PROJECT) for OS X Universal"; \
-	/Applications/Unity/Unity.app/Contents/MacOS/Unity \
-		-batchmode \
-		-nographics \
-		-silent-crashes \
-		-logFile $(LOG_PATH) \
-		-projectPath `pwd` \
-		-buildOSXUniversalPlayer "`pwd`/Build/osx/$(PROJECT).app" \
-		-quit
-	if [ $$? -ne 0 ]; then \
-		echo "OS X Universal: exit during the build with code $$?"; \
-		cat $(LOG_PATH); \
-		exit 1; \
-	fi; \
-	echo "OS X Universal: done!";
-
-linux:
-	set -e
-	echo "Attempting to build $(PROJECT) for Linux Universal"
-	/Applications/Unity/Unity.app/Contents/MacOS/Unity \
-		-batchmode \
-		-nographics \
-		-silent-crashes \
-		-logFile $(LOG_PATH) \
-		-projectPath `pwd` \
-		-buildLinuxUniversalPlayer "`pwd`/Build/linux/$(PROJECT)" \
-		-quit
-	if [ $$? -ne 0 ]; then \
-		echo "Linux Universal: exit during the build with code $$?"; \
-		cat $(LOG_PATH); \
-		exit 1; \
-	fi; \
-	echo "Linux Universal: done!";
-
 windows:
-	set -e
 	echo "Attempting to build $(PROJECT) for Windows"
 	/Applications/Unity/Unity.app/Contents/MacOS/Unity \
 		-batchmode \
@@ -73,7 +36,7 @@ windows:
 		-silent-crashes \
 		-logFile $(LOG_PATH) \
 		-projectPath `pwd` \
-		-buildWindowsPlayer "`pwd`/Build/windows/$(PROJECT).exe" \
+		-buildWindowsPlayer "../$(ZIP_PATH)/release/$(PROJECT).exe" \
 		-quit
 	if [ $$? -ne 0 ]; then \
 		echo "Windows: exit during the build with code $$?"; \
@@ -83,9 +46,8 @@ windows:
 	echo "Windows: done!";
 
 zip:
-	set -e
-	echo "Attempting to zip builds"
-	zip -r linux_u.zip `pwd`/Build/linux/
-	zip -r osx_u.zip `pwd`/Build/osx/
-	zip -r windows.zip `pwd`/Build/windows/
-	echo "All zip are ready for the deploy!"
+	echo "Attempting to zip the build"
+	cp -r . "../$(ZIP_PATH)/source"
+	mv "../$(ZIP_PATH)/source/LICENSE" "../$(ZIP_PATH)"
+	zip -r "$(ZIP_PATH).zip" "$(ZIP_PATH)"
+	echo "The zip is ready for the deploy!"
