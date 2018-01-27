@@ -1,6 +1,9 @@
 language: generic
 os: osx
 
+before_install:
+  - rmv get head
+
 install:
 - make install -s
 
