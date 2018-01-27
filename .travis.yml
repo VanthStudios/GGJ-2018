@@ -2,7 +2,7 @@ language: generic
 os: osx
 
 before_install:
-  - rvm get head
+  - rvm get stable
 
 install:
 - make install -s
