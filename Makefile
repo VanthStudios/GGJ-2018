@@ -18,7 +18,6 @@ all: windows linux osx
 	echo "All builds were built successfully."
 
 install:
-	set -e
 	for i in $(PACKAGE); do \
 		url="$(BASE_URL)/$(HASH)/$$i"; \
 		basePackage=`basename $$url`; \
@@ -29,7 +28,6 @@ install:
 	done;
 
 osx:
-	set -e
 	echo "Attempting to build $(PROJECT) for OS X Universal"; \
 	/Applications/Unity/Unity.app/Contents/MacOS/Unity \
 		-batchmode \
@@ -47,7 +45,6 @@ osx:
 	echo "OS X Universal: done!";
 
 linux:
-	set -e
 	echo "Attempting to build $(PROJECT) for Linux Universal"
 	/Applications/Unity/Unity.app/Contents/MacOS/Unity \
 		-batchmode \
@@ -65,7 +62,6 @@ linux:
 	echo "Linux Universal: done!";
 
 windows:
-	set -e
 	echo "Attempting to build $(PROJECT) for Windows"
 	/Applications/Unity/Unity.app/Contents/MacOS/Unity \
 		-batchmode \
@@ -83,9 +79,19 @@ windows:
 	echo "Windows: done!";
 
 zip:
-	set -e
 	echo "Attempting to zip builds"
 	zip -r linux_u.zip `pwd`/Build/linux/
 	zip -r osx_u.zip `pwd`/Build/osx/
 	zip -r windows.zip `pwd`/Build/windows/
 	echo "All zip are ready for the deploy!"
+
+
+
+
+
+
+
+
+
+
+
