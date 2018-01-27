@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DetectAntenna : MonoBehaviour
 {
     public float range = 4f;        // Length of the signal
-    public bool first = false;     // If the current antenna is the starting one
-    public bool last = false;
+    public bool fire = false;
 
     LineRenderer signalLine;        // Graphical line representing the signal
     Vector3 endPos;                 // Ending point of the line
@@ -15,18 +15,31 @@ public class DetectAntenna : MonoBehaviour
     Ray shootRay = new Ray();
     RaycastHit shootHit;
 
-    DetectAntenna lastAntennaHit = null;
+    Antenna lastAntennaHit = null;
+
+    public void StartFiring() {
+    	fire = true;
+    	signalLine.enabled = true;
+    }
+
+    public void StopFiring() {
+
+		if (lastAntennaHit != null){
+
+        	lastAntennaHit.Deactivate();
+        	lastAntennaHit = null;
+        }
+    	fire = false;
+    	signalLine.enabled = false;
+    }
 
     void Awake()
     {
         signalLine = GetComponent<LineRenderer>();
-        if (first)
-            signalLine.enabled = true;
-        else
-            signalLine.enabled = false;
 
-        signalLine.SetPosition(0, transform.position);
-        signalLine.SetPosition(1, transform.position + transform.forward * range);
+        if (!fire) {
+        	signalLine.enabled = false;
+        }
     }
 
 
@@ -36,14 +49,14 @@ public class DetectAntenna : MonoBehaviour
         signalLine.SetPosition(0, transform.position);
         signalLine.SetPosition(1, transform.position + transform.forward * range);
 
-        if(signalLine.enabled)
+        if (fire) {
             Shoot();
+        }
     }
 
 
     // Check if I hit other Antennas
     void Shoot() {
-
         shootRay.origin = transform.position;
         shootRay.direction = transform.forward;
 
@@ -55,37 +68,16 @@ public class DetectAntenna : MonoBehaviour
             if(hitTrans.gameObject.tag == "Antenna") {
 
                 // Do something, like activate other antenna
-                DetectAntenna detected = shootHit.collider.GetComponent<DetectAntenna>();
-                detected.Activate();
-                lastAntennaHit = detected;
+                lastAntennaHit = shootHit.collider.GetComponent<Antenna>();
+                lastAntennaHit.Activate();
             }
         }
-        else {
-            // Reset the antenna I was hitting
-            Deactivate();
-        }
-    }
+       	else if (lastAntennaHit != null){
 
-    // Antenna activates when hit
-    public void Activate() {
-        signalLine.enabled = true;
-        // Do Something
-    }
-
-    // Disable connection unless I am the first
-    public void Deactivate() {
-
-        if (lastAntennaHit != null)
-        {
-            lastAntennaHit.Deactivate();
+        	lastAntennaHit.Deactivate();
+        	lastAntennaHit = null;
         }
 
-
-        lastAntennaHit = null;
-
-        // Disable my possibility to emit
-        if (!first)
-            signalLine.enabled = false;
-
+        // Deactivate
     }
 }
