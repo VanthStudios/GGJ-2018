@@ -40,7 +40,7 @@ public class RuotaAntenna : MonoBehaviour
     void OnMouseDown()
     {
         canvas.gameObject.SetActive(true);
-        Debug.Log("onclick");
+        //Debug.Log("onclick");
     }
     public void ApriCanvas()
     {
