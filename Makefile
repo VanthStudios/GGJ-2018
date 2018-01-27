@@ -48,6 +48,6 @@ windows:
 zip:
 	echo "Attempting to zip the build"
 	cp -r . "../$(ZIP_PATH)/source"
-	mv "../$(ZIP_PATH)/source/LICENSE" "../$(ZIP_PATH)" 
+	mv "../$(ZIP_PATH)/source/LICENSE" "../$(ZIP_PATH)"
   zip -r $(ZIP_PATH).zip $(ZIP_PATH)
 	echo "The zip is ready for the deploy!"
